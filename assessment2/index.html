@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>HYF - Week 1</title>
+    <link rel="stylesheet" href="main.css">
+    <script async type="module" src="main.js"></script>
+  </head>
+  <body>
+    <div id="app">
+
+      <form>
+        <label for="shift">Shift:</label>
+        <select name="shift" id="shift">
+          <option value="-">choose a shift</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </form>
+
+      <h2>Text</h2>
+      <textarea id="plaintext"></textarea>
+
+      <h2>Decrypted</h2>
+      <textarea readonly id="encryptedtext"></textarea>
+    </div>
+  </body>
+</html>

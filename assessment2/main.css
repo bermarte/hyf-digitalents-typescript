@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
+html {
+    
+    background-image: url("./imgs/1024px-Gaius_Iulius_Caesar_(Vatican_Museum).jpg");
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: auto 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px;
+    font-family: 'Titillium Web', sans-serif;
+}
+#app {
+    padding: 100px;
+    color: white;
+    width: 100%;
+}
+label {
+    color:rgb(174, 201, 252);
+    font-size: 44px;
+    text-shadow: 2px 2px 8px #2b2b2b;
+    padding: 30px;
+}
+form {
+    padding-bottom: 50px;
+    border-bottom: 6px dotted rgb(59, 59, 63);
+}
+h2{
+    font-size: 44px;
+    text-shadow: 2px 2px 8px #2b2b2b;
+}
