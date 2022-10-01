@@ -1,0 +1,21 @@
+{
+  "name": "assessment1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "ts-node game.ts",
+    "build": "tsc game.ts --outFile game.js --module amd",
+    "watch": "nodemon game.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.13",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
