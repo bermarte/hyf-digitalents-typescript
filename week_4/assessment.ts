@@ -1,24 +1,23 @@
-// console.log('click any key to start')
 const readline: any = require('readline')
 
 
 class Box<T> {
   coll: Array<T> = [];
-  addBox?: (x: T) => T;
+  /* addBox?: (x: T) => T;
   removeBox?: () => T;
-  getBox?: (x: T) => T;
+  getBox?: (x: T) => T; */
 }
 
-enum Size {
+/* enum Size {
     A4,
     A5,
     A6,
     A7
-}
+} */
 
 // small box
 let smallBox = new Box<any>();
-smallBox.addBox = function (x) {
+/* smallBox.addBox = function (x) {
     smallBox.coll.push(x) 
 };
 smallBox.getBox = function () {
@@ -28,11 +27,11 @@ smallBox.getBox = function () {
     else {
         return smallBox.coll
     }
-};
+}; */
 
 // big box
 let bigBox = new Box<any>();
-bigBox.addBox = function (x) {
+/* bigBox.addBox = function (x) {
     bigBox.coll.push(x) 
 };
 bigBox.getBox = function () {
@@ -40,7 +39,7 @@ bigBox.getBox = function () {
         return 'empty'
     return bigBox.coll
 };
-
+ */
 
 
 // JS interface
