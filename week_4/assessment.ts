@@ -8,12 +8,12 @@ class Box<T> {
   getBox?: (x: T) => T; */
 }
 
-/* enum Size {
-    A4,
-    A5,
-    A6,
-    A7
-} */
+const enum Size {
+    A4 = 'A4',
+    A5 = 'A5',
+    A6 = 'A6',
+    A7 = 'A7'
+}
 
 // small box
 let smallBox = new Box<any>();
@@ -140,7 +140,9 @@ async function question3b() {
 async function question4() {
         try {
             if (obj === 'paper') {
-                size = await question( 'What is the size?\n')
+                while (size !== Size.A4 && size !== Size.A5 && size !== Size.A6 && size !== Size.A7) {
+                    size = await question( 'What is the size? (choose between A4, A5, A6, A7)\n')
+                }              
             } 
             
             question5()
