@@ -3,6 +3,7 @@ const readline: any = require('readline')
 
 class Box<T> {
   coll: Array<T> = [];
+  addBox?: (x: T) => T;
   /* addBox?: (x: T) => T;
   removeBox?: () => T;
   getBox?: (x: T) => T; */
@@ -15,10 +16,17 @@ const enum Size {
     A7 = 'A7'
 }
 
+const enum Tv {
+    LCD = 'LCD',
+    OLED = 'OLED'
+}
+
 // small box
 let smallBox = new Box<any>();
-/* smallBox.addBox = function (x) {
+smallBox.addBox = function (x) {
     smallBox.coll.push(x) 
+}
+/* 
 };
 smallBox.getBox = function () {
     console.log('hey')
@@ -53,23 +61,39 @@ const question = (...args: any) => new Promise((res, rej) => rl.question(...args
 let box: any, todo: any, what: any, size: any, weight: any, obj: any, capacity: any, typeTv: any
 async function question1() {
         try {
-            box = await question('With which box do you want to interact? (1) Small Box, (2) Big Box\n')
+            while (box !== '1' && box !== '2') {
+                box = await question('With which box do you want to interact? (1) Small Box, (2) Big Box\n')
+            }
+            
             question2()
         } catch (err) {
             console.error('Question rejected', err);
         }
     
 }
+
+const restart = () => {
+    box= 0
+    todo=0
+    what= 0
+    size = 0
+    weight = 0
+    obj = 0
+    capacity = 0
+    typeTv = 0
+}
 async function question2() {
 
         try {
-
-            todo = await question('What do you want to do? (1) add an item, (2) remove an item, (3) empty the box\n')
+            while (todo !== '1' && todo !== '2' && todo !== '3') {
+                todo = await question('What do you want to do? (1) add an item, (2) remove an item, (3) empty the box\n')
+            }
+            
             // small box
             if (todo === '1' && box === '1') {
-                question3()
+                return question3()
             } else if (todo === '1' && box === '2') {
-                question3b()
+                return question3b()
             }
             if (todo === '2' && box === '1') {
                 if (!smallBox.coll.length) {
@@ -96,7 +120,8 @@ async function question2() {
                 bigBox.coll.length = 0
                 console.log('the small box is now empty')
             }
-            question1()
+            restart()
+            return question1()
 
         } catch (err) {
             console.error('Question rejected', err);
@@ -104,16 +129,20 @@ async function question2() {
 }
 async function question3() {
         try {
-            what = await question( 'What item do you want to add? (1) Paper, (2) Pencil\n')
+            while (what !== '1' && what !== '2') {
+                what = await question( 'What item do you want to add? (1) Paper, (2) Pencil\n')
+            }
+    
             if (what === '1' && box === '1') {
                 obj = 'paper'
-                question4()
+                return question4()
             }
             if (what === '2' && box === '1') {
                 obj = 'pencil'
                 // console.log('add pencil')
-                question4()
+                return question4()
             }
+            return
         } catch (err) {
             console.error('Question rejected', err);
         }  
@@ -121,16 +150,18 @@ async function question3() {
 
 async function question3b() {
         try {
-            what = await question( 'What item do you want to add? (1) TV, (2) Speaker\n')
+            while (what !== '1' && what !== '2') {
+                what = await question( 'What item do you want to add? (1) TV, (2) Speaker\n')
+            }
             if (what === '1' && box === '2') {
                 obj = 'TV'
                 // console.log('you want to add a TV')
-                question4b()
+                return question4b()
             }
             if (what === '2' && box === '2') {
                 obj = 'Speaker'
                 // console.log('you want to add a Speaker')
-                question4b()
+                return question4b()
             }
         } catch (err) {
             console.error('Question rejected', err);
@@ -145,7 +176,7 @@ async function question4() {
                 }              
             } 
             
-            question5()
+            return question5()
         } catch (err) {
             console.error('Question rejected', err);
         }  
@@ -154,12 +185,14 @@ async function question4() {
 async function question4b() {
         try {
             if (obj === 'TV') {
-                typeTv = await question( 'What is the type?\n')
+                while (typeTv !== Tv.LCD && typeTv !== Tv.OLED) {
+                    typeTv = await question( 'What is the type? (choose between LCD and OLED)\n')
+                }
             }
             if (obj === 'Speaker') {
                 capacity = await question( 'What is the capacity?\n')
             }
-            question5()
+            return question5()
         } catch (err) {
             console.error('Question rejected', err);
         }  
@@ -171,7 +204,7 @@ async function question5() {
             if (box === '1' && obj === 'paper') {
                 smallBox.coll.push({obj, size, weight})
                 console.table(smallBox.coll)
-                
+                //return question1()
             } 
             else if (box === '1' && obj === 'pencil') {
                 smallBox.coll.push({obj, weight})
@@ -187,7 +220,8 @@ async function question5() {
                 
                 console.table(bigBox.coll)
             }
-            question1()
+            restart()
+            return question1()
         } catch (err) {
             console.error('Question rejected', err);
         }  
