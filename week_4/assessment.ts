@@ -1,12 +1,10 @@
 const readline: any = require('readline')
 
-
 class Box<T> {
   coll: Array<T> = [];
-  addBox?: (x: T) => T;
-  /* addBox?: (x: T) => T;
-  removeBox?: () => T;
-  getBox?: (x: T) => T; */
+  addItem?: (x: T) => T;
+  removeItem?: () => T;
+  getBox?: (x: T) => T;
 }
 
 const enum Size {
@@ -23,8 +21,11 @@ const enum Tv {
 
 // small box
 let smallBox = new Box<any>();
-smallBox.addBox = function (x) {
+smallBox.addItem = function (x) {
     smallBox.coll.push(x) 
+}
+smallBox.removeItem = function () {
+    smallBox.coll.shift()
 }
 /* 
 };
@@ -39,9 +40,15 @@ smallBox.getBox = function () {
 
 // big box
 let bigBox = new Box<any>();
-/* bigBox.addBox = function (x) {
+bigBox.addItem = function (x) {
     bigBox.coll.push(x) 
-};
+}
+
+bigBox.removeItem = function () {
+    bigBox.coll.shift()
+}
+
+/* 
 bigBox.getBox = function () {
     if (!bigBox?.coll.length)
         return 'empty'
@@ -56,9 +63,10 @@ const rl: any = readline.createInterface({
     output: process.stdout
 })
 
+
 var util = require('util');
 const question = (...args: any) => new Promise((res, rej) => rl.question(...args, res))
-let box: any, todo: any, what: any, size: any, weight: any, obj: any, capacity: any, typeTv: any
+let box: unknown, todo: unknown, what: unknown, size: unknown, weight: unknown, obj: unknown, capacity: unknown, typeTv: unknown
 async function question1() {
         try {
             while (box !== '1' && box !== '2') {
@@ -99,7 +107,7 @@ async function question2() {
                 if (!smallBox.coll.length) {
                     console.log('The small box is currently empty!')
                 } else {
-                    smallBox.coll.shift()
+                    smallBox.removeItem!()
                     console.table(smallBox.coll)
                 }
             }
@@ -112,13 +120,13 @@ async function question2() {
                 if (!bigBox.coll.length) {
                     console.log('The big box is currently empty!')
                 } else {
-                    bigBox.coll.shift()
+                    bigBox.removeItem!()
                     console.table(bigBox.coll)
                 }
             }
             if (todo === '3' && box === '2') {
                 bigBox.coll.length = 0
-                console.log('the small box is now empty')
+                console.log('the big box is now empty')
             }
             restart()
             return question1()
@@ -139,7 +147,6 @@ async function question3() {
             }
             if (what === '2' && box === '1') {
                 obj = 'pencil'
-                // console.log('add pencil')
                 return question4()
             }
             return
@@ -155,12 +162,10 @@ async function question3b() {
             }
             if (what === '1' && box === '2') {
                 obj = 'TV'
-                // console.log('you want to add a TV')
                 return question4b()
             }
             if (what === '2' && box === '2') {
                 obj = 'Speaker'
-                // console.log('you want to add a Speaker')
                 return question4b()
             }
         } catch (err) {
@@ -202,20 +207,19 @@ async function question5() {
         try {
             weight = await question( 'What is the weight?\n')
             if (box === '1' && obj === 'paper') {
-                smallBox.coll.push({obj, size, weight})
+                smallBox.addItem!({obj, size, weight})             
                 console.table(smallBox.coll)
-                //return question1()
             } 
             else if (box === '1' && obj === 'pencil') {
-                smallBox.coll.push({obj, weight})
+                smallBox.addItem!({obj, weight})
                 console.table(smallBox.coll)
             }
             else if (box === '2') {
                 if (obj === 'TV') {
-                    bigBox.coll.push({obj, typeTv, weight})
+                    bigBox.addItem!({obj, typeTv, weight})
                 }
                 else if (obj === 'Speaker') {
-                    bigBox.coll.push({obj, capacity, weight})
+                    bigBox.addItem!({obj, capacity, weight})
                 }
                 
                 console.table(bigBox.coll)
