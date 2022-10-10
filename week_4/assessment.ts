@@ -26,7 +26,7 @@ const enum BoxType {
 
 // small box
 let smallBox = new Box<any>();
-smallBox.addItem = function (x: Object) {
+smallBox.addItem = function (x: Object) : void {
     smallBox.coll.push(x) 
 }
 smallBox.removeItem = function (): void {
@@ -201,19 +201,20 @@ async function question5() {
         try {
             weight = await question( 'What is the weight?\n')
             if (box === BoxType.Small.toString() && obj === 'paper') {
-                smallBox.addItem!({obj, size, weight})
+                
+                smallBox.addItem!({obj, size, weight: Number(weight)})
                 smallBox.getBox!(smallBox.coll)     
             } 
             else if (box === '1' && obj === 'pencil') {
-                smallBox.addItem!({obj, weight})
+                smallBox.addItem!({obj, weight: Number(weight)})
                 smallBox.getBox!(smallBox.coll)
             }
             else if (box === '2') {
                 if (obj === 'TV') {
-                    bigBox.addItem!({obj, typeTv, weight})
+                    bigBox.addItem!({obj, typeTv,  weight: Number(weight)})
                 }
                 else if (obj === 'Speaker') {
-                    bigBox.addItem!({obj, capacity, weight})
+                    bigBox.addItem!({obj, capacity,  weight: Number(weight)})
                 }
                 bigBox.getBox!(bigBox.coll)
             }
