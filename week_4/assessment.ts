@@ -19,24 +19,23 @@ const enum Tv {
     OLED = 'OLED'
 }
 
+const enum BoxType {
+    Small = 1,
+    Big
+}
+
 // small box
 let smallBox = new Box<any>();
-smallBox.addItem = function (x) {
+smallBox.addItem = function (x: Object) {
     smallBox.coll.push(x) 
 }
-smallBox.removeItem = function () {
+smallBox.removeItem = function (): void {
     smallBox.coll.shift()
 }
-/* 
-};
-smallBox.getBox = function () {
-    console.log('hey')
-    if (!smallBox?.coll.length)
-        return 'NOTHING THERE'
-    else {
-        return smallBox.coll
-    }
-}; */
+
+smallBox.getBox = function (x: Object[]): void {
+    return console.table(x)
+}
 
 // big box
 let bigBox = new Box<any>();
@@ -44,18 +43,13 @@ bigBox.addItem = function (x) {
     bigBox.coll.push(x) 
 }
 
-bigBox.removeItem = function () {
+bigBox.removeItem = function (): void {
     bigBox.coll.shift()
 }
 
-/* 
-bigBox.getBox = function () {
-    if (!bigBox?.coll.length)
-        return 'empty'
-    return bigBox.coll
-};
- */
-
+bigBox.getBox = function (x: Object[]): void {
+    return console.table(x)
+}
 
 // JS interface
 const rl: any = readline.createInterface({
@@ -65,11 +59,11 @@ const rl: any = readline.createInterface({
 
 
 var util = require('util');
-const question = (...args: any) => new Promise((res, rej) => rl.question(...args, res))
+const question = (...args: any) => new Promise((res: unknown, rej: unknown) => rl.question(...args, res))
 let box: unknown, todo: unknown, what: unknown, size: unknown, weight: unknown, obj: unknown, capacity: unknown, typeTv: unknown
 async function question1() {
         try {
-            while (box !== '1' && box !== '2') {
+            while (box !== BoxType.Small.toString() && box !== BoxType.Big.toString()) {
                 box = await question('With which box do you want to interact? (1) Small Box, (2) Big Box\n')
             }
             
@@ -98,33 +92,33 @@ async function question2() {
             }
             
             // small box
-            if (todo === '1' && box === '1') {
+            if (todo === '1' && box === BoxType.Small.toString()) {
                 return question3()
             } else if (todo === '1' && box === '2') {
                 return question3b()
             }
-            if (todo === '2' && box === '1') {
+            if (todo === '2' && box === BoxType.Small.toString()) {
                 if (!smallBox.coll.length) {
                     console.log('The small box is currently empty!')
                 } else {
                     smallBox.removeItem!()
-                    console.table(smallBox.coll)
+                    smallBox.getBox!(smallBox.coll)
                 }
             }
-            if (todo === '3' && box === '1') {
+            if (todo === '3' && box === BoxType.Small.toString()) {
                 smallBox.coll.length = 0
                 console.log('the small box is now empty')
             }
             // big box
-            if (todo === '2' && box === '2') {
+            if (todo === '2' && box === BoxType.Big.toString()) {
                 if (!bigBox.coll.length) {
                     console.log('The big box is currently empty!')
                 } else {
                     bigBox.removeItem!()
-                    console.table(bigBox.coll)
+                    bigBox.getBox!(bigBox.coll)
                 }
             }
-            if (todo === '3' && box === '2') {
+            if (todo === '3' && box === BoxType.Big.toString()) {
                 bigBox.coll.length = 0
                 console.log('the big box is now empty')
             }
@@ -141,7 +135,7 @@ async function question3() {
                 what = await question( 'What item do you want to add? (1) Paper, (2) Pencil\n')
             }
     
-            if (what === '1' && box === '1') {
+            if (what === '1' && box === BoxType.Small.toString()) {
                 obj = 'paper'
                 return question4()
             }
@@ -160,11 +154,11 @@ async function question3b() {
             while (what !== '1' && what !== '2') {
                 what = await question( 'What item do you want to add? (1) TV, (2) Speaker\n')
             }
-            if (what === '1' && box === '2') {
+            if (what === '1' && box === BoxType.Big.toString()) {
                 obj = 'TV'
                 return question4b()
             }
-            if (what === '2' && box === '2') {
+            if (what === '2' && box === BoxType.Big.toString()) {
                 obj = 'Speaker'
                 return question4b()
             }
@@ -206,13 +200,13 @@ async function question4b() {
 async function question5() {
         try {
             weight = await question( 'What is the weight?\n')
-            if (box === '1' && obj === 'paper') {
-                smallBox.addItem!({obj, size, weight})             
-                console.table(smallBox.coll)
+            if (box === BoxType.Small.toString() && obj === 'paper') {
+                smallBox.addItem!({obj, size, weight})
+                smallBox.getBox!(smallBox.coll)     
             } 
             else if (box === '1' && obj === 'pencil') {
                 smallBox.addItem!({obj, weight})
-                console.table(smallBox.coll)
+                smallBox.getBox!(smallBox.coll)
             }
             else if (box === '2') {
                 if (obj === 'TV') {
@@ -221,8 +215,7 @@ async function question5() {
                 else if (obj === 'Speaker') {
                     bigBox.addItem!({obj, capacity, weight})
                 }
-                
-                console.table(bigBox.coll)
+                bigBox.getBox!(bigBox.coll)
             }
             restart()
             return question1()
