@@ -1,4 +1,4 @@
-const readline: any = require("readline");
+const readline = require("readline");
 
 class Box<T> {
   coll: Array<T> = [];
@@ -52,14 +52,14 @@ bigBox.getBox = function (x: Object[]): void {
 };
 
 // JS interface
-const rl: any = readline.createInterface({
+const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   terminal: false,
 });
 
 var util = require("util");
-const question = (...args: any) =>
+const question = (...args: string[]) =>
   new Promise((res: unknown, rej: unknown) => rl.question(...args, res));
 
 let box: unknown,
@@ -94,10 +94,6 @@ const restart = () => {
   obj = 0;
   capacity = 0;
   typeTv = 0;
-};
-
-const checkClose = () => {
-  console.log("bye");
 };
 
 async function question2() {
