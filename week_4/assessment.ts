@@ -24,22 +24,65 @@ const enum BoxType {
   Big,
 }
 
+type ItemType = {
+  obj: string;
+  typeTv?: string;
+  capacity?: string;
+  weight: number;
+  size?: string;
+};
+
+class Item {
+  obj: string;
+  weight: number;
+  constructor(obj: string, weight: number) {
+    this.obj = obj;
+    this.weight = weight;
+  }
+}
+
+class Paper extends Item {
+  size: string;
+  constructor(obj: string, size: string, weight: number) {
+    super(obj, weight);
+    this.size = size;
+  }
+}
+
+class Pencil extends Item {}
+
+class Tele extends Item {
+  typeTv: string;
+  constructor(obj: string, typeTv: string, weight: number) {
+    super(obj, weight);
+    this.typeTv = typeTv;
+  }
+}
+
+class Speak extends Item {
+  capacity: string;
+  constructor(obj: string, capacity: string, weight: number) {
+    super(obj, weight);
+    this.capacity = capacity;
+  }
+}
+
 // small box
-let smallBox = new Box<any>();
-smallBox.addItem = function (x: Object): void {
+let smallBox = new Box<Paper | Pencil | void[] | void>();
+smallBox.addItem = function (x): void {
   smallBox.coll.push(x);
 };
 smallBox.removeItem = function (): void {
   smallBox.coll.shift();
 };
 
-smallBox.getBox = function (x: Object[]): void {
+smallBox.getBox = function (x: Paper | Pencil | void[] | void): void {
   return console.table(x);
 };
 
 // big box
-let bigBox = new Box<any>();
-bigBox.addItem = function (x) {
+let bigBox = new Box<Tele | Speak | void[] | void>();
+bigBox.addItem = function (x): void {
   bigBox.coll.push(x);
 };
 
@@ -47,7 +90,7 @@ bigBox.removeItem = function (): void {
   bigBox.coll.shift();
 };
 
-bigBox.getBox = function (x: Object[]): void {
+bigBox.getBox = function (x: Tele | Speak | void[] | void): void {
   return console.table(x);
 };
 
@@ -115,7 +158,7 @@ async function question2() {
         console.log("The small box is currently empty!");
       } else {
         smallBox.removeItem!();
-        smallBox.getBox!(smallBox.coll);
+        smallBox.getBox!(smallBox.coll as []);
       }
     }
     if (todo === "3" && box === BoxType.Small.toString()) {
@@ -128,7 +171,7 @@ async function question2() {
         console.log("The big box is currently empty!");
       } else {
         bigBox.removeItem!();
-        bigBox.getBox!(bigBox.coll);
+        bigBox.getBox!(bigBox.coll as []);
       }
     }
     if (todo === "3" && box === BoxType.Big.toString()) {
@@ -228,18 +271,18 @@ async function question5() {
       weight = (await question("What is the weight?\n")) as number;
     }
     if (box === BoxType.Small.toString() && obj === "paper") {
-      smallBox.addItem!({ obj, size, weight: Number(weight) });
-      smallBox.getBox!(smallBox.coll);
+      smallBox.addItem!(new Paper(obj, size as string, Number(weight)));
+      smallBox.getBox!(smallBox.coll as []);
     } else if (box === "1" && obj === "pencil") {
-      smallBox.addItem!({ obj, weight: Number(weight) });
-      smallBox.getBox!(smallBox.coll);
+      smallBox.addItem!(new Pencil(obj, Number(weight)));
+      smallBox.getBox!(smallBox.coll as []);
     } else if (box === "2") {
       if (obj === "TV") {
-        bigBox.addItem!({ obj, typeTv, weight: Number(weight) });
+        bigBox.addItem!(new Tele(obj, typeTv as string, Number(weight)));
       } else if (obj === "Speaker") {
-        bigBox.addItem!({ obj, capacity, weight: Number(weight) });
+        bigBox.addItem!(new Speak(obj, capacity as string, Number(weight)));
       }
-      bigBox.getBox!(bigBox.coll);
+      bigBox.getBox!(bigBox.coll as []);
     }
     restart();
     return question1();
