@@ -228,7 +228,9 @@ async function question4b() {
 
 async function question5() {
   try {
-    weight = (await question("What is the weight?\n")) as number;
+    while (isNaN(weight) || weight <= 0) {
+      weight = (await question("What is the weight?\n")) as number;
+    }
     if (box === BoxType.Small.toString() && obj === "paper") {
       smallBox.addItem!({ obj, size, weight: Number(weight) });
       smallBox.getBox!(smallBox.coll);
