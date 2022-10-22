@@ -1,0 +1,129 @@
+$margin: 6px;
+$biggerMargin: 10px;
+
+body {
+  font-family: Verdana, sans-serif;
+}
+.App {
+  text-align: center;
+}
+.App-header {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.colorCard {
+  height: 200px;
+  width: 200px;
+}
+
+.cardWrapper {
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+}
+
+.startButton {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  line-height: 180px;
+  font-size: 30px;
+}
+.score {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  line-height: 180px;
+  font-size: 50px;
+}
+.lost {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.startAgain {
+  background-color: rgb(106, 243, 15);
+  padding: 6px;
+  margin-top: 6px;
+  border-radius: 4%;
+  color: teal;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.flash.flash {
+  border: $margin solid white;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.red {
+  background-color: red;
+  border-top-right-radius: 100%;
+  border-left: $margin solid black;
+  border-bottom: $margin solid black;
+  border-right: $biggerMargin solid black;
+  border-top: $biggerMargin solid black;
+  box-sizing: border-box;
+  &.flash {
+    background-color: rgb(255, 125, 125);
+    border-top-right-radius: 100%;
+  }
+}
+
+.blue {
+  background-color: blue;
+  border-bottom-right-radius: 100%;
+  box-sizing: border-box;
+  border-left: $margin solid black;
+  border-right: $biggerMargin solid black;
+  border-bottom: $biggerMargin solid black;
+  &.flash {
+    background-color: rgb(125, 125, 255);
+    border-bottom-right-radius: 100%;
+  }
+}
+
+.yellow {
+  background-color: yellow;
+  border-bottom-left-radius: 100%;
+  box-sizing: border-box;
+  border-left: $biggerMargin solid black;
+  border-bottom: $biggerMargin solid black;
+  &.flash {
+    background-color: rgb(255, 255, 125);
+    border-bottom-left-radius: 100%;
+  }
+}
+
+.green {
+  background-color: green;
+  border-top-left-radius: 100%;
+  box-sizing: border-box;
+  border-bottom: $margin solid black;
+  border-left: $biggerMargin solid black;
+  border-top: $biggerMargin solid black;
+  &.flash {
+    background-color: rgb(125, 255, 125);
+    border-top-left-radius: 100%;
+  }
+}
