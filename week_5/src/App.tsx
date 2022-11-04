@@ -2,6 +2,8 @@ import "./App.scss";
 import { useState, useEffect } from "react";
 import { ColorCard } from "./components/ColorCard";
 import timeout from "./utils/util";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { beep1, beep2, beep3, beep4, fail, playSound } from "./utils/audio";
 
 function App(): JSX.Element | null {
   const [isOn, setIsOn] = useState<boolean>(false);
@@ -55,6 +57,28 @@ function App(): JSX.Element | null {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOn, play.isDisplay, play.colors.length]);
+  // ["green", "red", "yellow", "blue"];
+  const whichSound = (col: any) => {
+    console.log("col", col);
+    switch (col) {
+      case "green":
+        console.log("green");
+        playSound(beep1);
+        break;
+      case "red":
+        console.log("red");
+        playSound(beep2);
+        break;
+      case "yellow":
+        console.log("yellow");
+        playSound(beep3);
+        break;
+      case "blue":
+        console.log("blue");
+        playSound(beep4);
+        break;
+    }
+  };
 
   async function displayColors(): Promise<void> {
     await timeout(1000);
@@ -115,19 +139,38 @@ function App(): JSX.Element | null {
               <ColorCard
                 key={item}
                 color={item}
-                onClick={() => cardClickHandle(item)}
+                onClick={() => {
+                  let audioEffect: string | undefined = undefined;
+                  if (item === "green") {
+                    audioEffect = beep1;
+                  }
+                  if (item === "red") {
+                    audioEffect = beep2;
+                  }
+                  if (item === "blue") {
+                    audioEffect = beep3;
+                  }
+                  if (item === "yellow") {
+                    audioEffect = beep4;
+                  }
+                  audioEffect && playSound(audioEffect);
+                  cardClickHandle(item);
+                }}
                 flash={flashColor === item}
               />
             ))}
         </div>
         {/* lost */}
         {isOn && !play.isDisplay && !play.userPlay && play.score && (
-          <div className="lost">
-            <div>Final Score: {play.score - 1} </div>
-            <div className="startAgain" onClick={closeHandle}>
-              Start Again
+          <>
+            {playSound(fail)}
+            <div className="lost">
+              <div>Final Score: {play.score - 1} </div>
+              <div className="startAgain" onClick={closeHandle}>
+                Start Again
+              </div>
             </div>
-          </div>
+          </>
         )}
         {!isOn && !play.score && (
           <div onClick={startHandle} className="startButton">
