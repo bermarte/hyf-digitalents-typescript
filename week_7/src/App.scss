@@ -1,0 +1,49 @@
+$cell: 80px;
+
+.App {
+  text-align: center;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(189, 244, 236);
+}
+
+.container {
+  background-color: green;
+  display: flex;
+  flex-wrap: wrap;
+  width: $cell * 7;
+  height: $cell * 6;
+  justify-content: center;
+  padding: 18px;
+  &_cell {
+    width: $cell;
+    height: $cell;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_place {
+      width: $cell * 0.8;
+      height: $cell * 0.8;
+      background-color: white;
+      border-radius: 50%;
+      line-height: $cell * 0.8;
+      &:hover {
+        background-color: rgb(215, 215, 215);
+        cursor: crosshair;
+      }
+    }
+  }
+}
+.canLand {
+  // background-color: red;
+}
+.player1 {
+  background-color: blue;
+  pointer-events: none;
+}
