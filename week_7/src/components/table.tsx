@@ -1,26 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function GameTable() {
+  const [player, setPlayer] = useState<string>("player1");
   function checkItem(item: any) {
     console.log(item);
     canLandInit();
-    const lastRow = [36, 37, 38, 39, 40, 41, 42];
 
+    const lastRow = [36, 37, 38, 39, 40, 41, 42];
     // check if you can click the cell
     if (
       lastRow.indexOf(item) !== -1 ||
       (cellPlaces.current!.children[item + 6].children[0].classList.contains(
         "canLand"
       ) &&
-        cellPlaces.current!.children[item + 6].children[0].classList.contains(
+        (cellPlaces.current!.children[item + 6].children[0].classList.contains(
           "player1"
-        ))
+        ) ||
+          cellPlaces.current!.children[item + 6].children[0].classList.contains(
+            "player2"
+          )))
     ) {
       cellPlaces.current!.children[item - 1].children[0].classList.add(
         "canLand",
-        "player1"
+        player
       );
+      player === "player2" ? setPlayer("player1") : setPlayer("player2");
     }
   }
 
@@ -40,7 +45,8 @@ export default function GameTable() {
   }
 
   function canLandInit() {
-    // add class to last row: cells 35 to 41
+    // add classes to last row: cells 35 to 41
+    // eslint-disable-next-line array-callback-return
     [...Array(7)].map((x, i) => {
       cellPlaces.current?.children[i + 35].children[0].classList.add("canLand");
     });
