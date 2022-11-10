@@ -3,10 +3,6 @@ export function checkWinner(dom: any, player: any) {
   check(win, player);
 
   function check(arr: any[], clss: string) {
-    return checkSubarr(arr, clss);
-  }
-
-  function checkSubarr(arr: any[], clss: string) {
     for (let i = 0; i < arr.length; i++) {
       const all = arr[i].every((element: any) => {
         if (
