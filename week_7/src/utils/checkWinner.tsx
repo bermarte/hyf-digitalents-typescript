@@ -1,6 +1,6 @@
 import { win } from "../data/winningCombinations";
-export function checkWinner(dom: any) {
-  check(win, "player1");
+export function checkWinner(dom: any, player: any) {
+  check(win, player);
 
   function check(arr: any[], clss: string) {
     return checkSubarr(arr, clss);
@@ -18,7 +18,7 @@ export function checkWinner(dom: any) {
         }
       });
       if (all) {
-        console.log("player 1 wins");
+        console.log(`${player} wins`);
       }
     }
   }

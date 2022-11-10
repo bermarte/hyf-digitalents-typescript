@@ -25,7 +25,7 @@ export default function GameTable() {
         player
       );
       player === "player2" ? setPlayer("player1") : setPlayer("player2");
-      checkWinner(cellPlaces);
+      checkWinner(cellPlaces, player);
     }
   }
 
