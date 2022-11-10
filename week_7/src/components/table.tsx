@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRef, useState } from "react";
+import { checkWinner } from "../utils/checkWinner";
 
 export default function GameTable() {
   const [player, setPlayer] = useState<string>("player1");
   function checkItem(item: any) {
     console.log(item);
     canLandInit();
-
     const lastRow = [36, 37, 38, 39, 40, 41, 42];
     // check if you can click the cell
     if (
@@ -26,6 +25,7 @@ export default function GameTable() {
         player
       );
       player === "player2" ? setPlayer("player1") : setPlayer("player2");
+      checkWinner(cellPlaces);
     }
   }
 
