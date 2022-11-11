@@ -51,3 +51,35 @@ $cell: 80px;
   background-color: red;
   pointer-events: none;
 }
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(106, 166, 183);
+  &_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    &_btn {
+      background-color: rgb(145, 215, 250);
+      height: 60px;
+      width: 140px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.blue {
+  display: none;
+}
+.red {
+  display: none;
+}

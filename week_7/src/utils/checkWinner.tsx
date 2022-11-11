@@ -14,7 +14,12 @@ export function checkWinner(dom: any, player: any) {
         }
       });
       if (all) {
-        console.log(`${player} wins`);
+        let col;
+        player === "player1" ? (col = ".blue") : (col = ".red");
+        // @ts-ignore: Object is possibly 'null'.
+        document.querySelector(col).style.display = "block";
+        // @ts-ignore: Object is possibly 'null'.
+        return (document.querySelector(".modal").style.display = "block");
       }
     }
   }

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Modal from "./modal";
 import { checkWinner } from "../utils/checkWinner";
 
 export default function GameTable() {
@@ -57,6 +58,7 @@ export default function GameTable() {
       <div className="container" ref={cellPlaces}>
         {matrix()}
       </div>
+      <Modal />
     </>
   );
 }
