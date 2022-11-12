@@ -62,6 +62,7 @@ export default function GameTable(): JSX.Element {
       <div className="container" ref={cellPlaces}>
         {matrix()}
       </div>
+      <div className="table"></div>
       <Modal />
     </>
   );
