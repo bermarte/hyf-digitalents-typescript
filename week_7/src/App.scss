@@ -44,7 +44,8 @@ $cell: 80px;
       -moz-box-shadow: inset 0px 0px 54px -8px rgba(0, 0, 0, 0.17);
       box-shadow: inset 0px 0px 54px -8px rgba(0, 0, 0, 0.17);
       &:hover {
-        background-color: rgb(215, 215, 215);
+        border: 3px solid;
+        border-color: rgb(30, 29, 29);
         cursor: crosshair;
       }
     }
