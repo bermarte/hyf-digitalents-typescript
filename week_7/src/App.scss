@@ -54,6 +54,7 @@ $cell: 80px;
   width: 100%;
   margin-top: -50px;
   height: 120px;
+  z-index: 1;
   -webkit-box-shadow: inset 0 250px 58px -178px rgba(69, 75, 112, 0.3);
   -moz-box-shadow: inset 0 250px 58px -178px rgba(69, 75, 112, 0.3);
   box-shadow: inset 0 250px 58px -178px rgba(69, 75, 112, 0.3);
@@ -78,10 +79,6 @@ $cell: 80px;
   background-color: rgb(106, 166, 183);
   background-image: url("../public/img/blurry_background.jpg");
   &_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 100vh;
     &_btn {
@@ -100,4 +97,8 @@ $cell: 80px;
 }
 .red {
   display: none;
+}
+.winning {
+  border: 2px solid;
+  border-color: yellow;
 }

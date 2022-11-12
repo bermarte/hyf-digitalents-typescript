@@ -11,6 +11,7 @@ export default function Modal(): JSX.Element {
       cell.classList.remove("canLand");
       cell.classList.remove("player1");
       cell.classList.remove("player2");
+      cell.classList.remove("winning");
     });
   }
   return (
