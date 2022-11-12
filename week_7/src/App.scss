@@ -9,8 +9,10 @@ $cell: 80px;
   justify-content: center;
   align-items: center;
   width: 100vw;
+  min-width: min-content;
   height: 100vh;
   background-color: rgb(189, 244, 236);
+  background-image: url("../public/img/blurry_background_start.jpg");
 }
 
 .container {
@@ -21,6 +23,10 @@ $cell: 80px;
   height: $cell * 6;
   justify-content: center;
   padding: 18px;
+  -webkit-box-shadow: -5px 14px 25px -15px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -5px 14px 25px -15px rgba(0, 0, 0, 0.75);
+  box-shadow: -5px 14px 25px -15px rgba(0, 0, 0, 0.75);
+  // min-width: 700px;
   &_cell {
     width: $cell;
     height: $cell;
@@ -33,6 +39,9 @@ $cell: 80px;
       background-color: white;
       border-radius: 50%;
       line-height: $cell * 0.8;
+      -webkit-box-shadow: inset 0px 0px 54px -8px rgba(0, 0, 0, 0.17);
+      -moz-box-shadow: inset 0px 0px 54px -8px rgba(0, 0, 0, 0.17);
+      box-shadow: inset 0px 0px 54px -8px rgba(0, 0, 0, 0.17);
       &:hover {
         background-color: rgb(215, 215, 215);
         cursor: crosshair;
@@ -46,10 +55,12 @@ $cell: 80px;
 .player1 {
   background-color: blue;
   pointer-events: none;
+  color: white;
 }
 .player2 {
   background-color: red;
   pointer-events: none;
+  color: white;
 }
 .modal {
   display: none;
@@ -59,6 +70,7 @@ $cell: 80px;
   width: 100vw;
   height: 100vh;
   background-color: rgb(106, 166, 183);
+  background-image: url("../public/img/blurry_background.jpg");
   &_container {
     display: flex;
     flex-direction: column;

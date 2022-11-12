@@ -2,12 +2,11 @@ import { useRef, useState } from "react";
 import Modal from "./modal";
 import { checkWinner } from "../utils/checkWinner";
 
-export default function GameTable() {
+export default function GameTable(): JSX.Element {
   const [player, setPlayer] = useState<string>("player1");
-  function checkItem(item: any) {
-    console.log(item);
+  function checkItem(item: number) {
     canLandInit();
-    const lastRow = [36, 37, 38, 39, 40, 41, 42];
+    const lastRow: number[] = [36, 37, 38, 39, 40, 41, 42];
     // check if you can click the cell
     if (
       lastRow.indexOf(item) !== -1 ||
@@ -33,22 +32,27 @@ export default function GameTable() {
   const cellPlaces = useRef<HTMLHeadingElement>(null);
 
   // connect-4 7x6 (42) cells
-  function matrix() {
-    const numbers = Array.from({ length: 42 });
-    const listItems = numbers.map((item: any, i: any) => (
-      <div className="container_cell" key={i}>
-        <div className="container_cell_place" onClick={() => checkItem(i + 1)}>
-          {i + 1}
+  function matrix(): JSX.Element[] {
+    const numbers: unknown[] = Array.from({ length: 42 });
+    const listItems: JSX.Element[] = numbers.map(
+      (item: unknown, i: number): JSX.Element => (
+        <div className="container_cell" key={i}>
+          <div
+            className="container_cell_place"
+            onClick={() => checkItem(i + 1)}
+          >
+            {i + 1}
+          </div>
         </div>
-      </div>
-    ));
+      )
+    );
     return listItems;
   }
 
-  function canLandInit() {
+  function canLandInit(): void {
     // add classes to last row: cells 35 to 41
     // eslint-disable-next-line array-callback-return
-    [...Array(7)].map((x, i) => {
+    [...Array(7)].map((x, i): void => {
       cellPlaces.current?.children[i + 35].children[0].classList.add("canLand");
     });
   }

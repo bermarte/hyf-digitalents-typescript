@@ -1,5 +1,5 @@
-export default function Modal() {
-  function reset() {
+export default function Modal(): JSX.Element {
+  function reset(): void {
     // @ts-ignore: Object is possibly 'null'.
     document.querySelector(".blue").style.display = "none";
     // @ts-ignore: Object is possibly 'null'.
@@ -7,7 +7,7 @@ export default function Modal() {
     // @ts-ignore: Object is possibly 'null'.
     document.querySelector(".modal").style.display = "none";
     const dom = document.querySelectorAll(".container_cell_place");
-    dom.forEach((cell) => {
+    dom.forEach((cell: Element) => {
       cell.classList.remove("canLand");
       cell.classList.remove("player1");
       cell.classList.remove("player2");
