@@ -103,3 +103,6 @@ $cell: 80px;
   border: 2px solid;
   border-color: yellow;
 }
+.disabled {
+  pointer-events: none;
+}

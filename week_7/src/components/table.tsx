@@ -7,7 +7,7 @@ export default function GameTable(): JSX.Element {
   function checkItem(item: number) {
     canLandInit();
     const lastRow: number[] = [36, 37, 38, 39, 40, 41, 42];
-    // check if you can click the cell
+    // check if the cell is clickable
     if (
       lastRow.indexOf(item) !== -1 ||
       (cellPlaces.current!.children[item + 6].children[0].classList.contains(

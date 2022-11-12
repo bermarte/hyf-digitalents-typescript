@@ -8,7 +8,7 @@ export function checkWinner(
 
   function check(arr: number[][], clss: string): void {
     for (let i = 0; i < arr.length; i++) {
-      const winningNums: any[] = [];
+      const winningNums: number[][] = [];
       const all = arr[i].every((element: number): boolean => {
         if (
           dom?.current?.children[element].children[0].classList.contains(clss)
@@ -20,7 +20,6 @@ export function checkWinner(
         }
       });
       if (all) {
-        console.log(winningNums[0]);
         winningNums[0].forEach((x: number) =>
           dom?.current?.children[x].children[0].classList.add("winning")
         );
@@ -28,6 +27,12 @@ export function checkWinner(
         player === "player1" ? (col = ".blue") : (col = ".red");
         // @ts-ignore: Object is possibly 'null'.
         document.querySelector(col).style.display = "block";
+        [].slice
+          .call(dom?.current?.children)
+          // eslint-disable-next-line no-loop-func
+          .forEach((x: HTMLHeadingElement) =>
+            x.children[0].classList.add("disabled")
+          );
         // @ts-ignore: Object is possibly 'null'.
         return (document.querySelector(".modal").style.display = "block");
       }
