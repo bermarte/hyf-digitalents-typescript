@@ -80,8 +80,11 @@ $cell: 80px;
   background-color: rgb(106, 166, 183);
   background-image: url("../public/img/blurry_background.jpg");
   &_container {
+    z-index: 3;
+    position: relative;
     width: 100vw;
     height: 100vh;
+    z-index: 1122;
     &_btn {
       background-color: rgb(145, 215, 250);
       height: 60px;
